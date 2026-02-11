@@ -41,11 +41,11 @@ export default function SearchBar({ onError }: SearchBarProps) {
   return (
     <div className="flex flex-col gap-2 p-4 border-b border-border">
       <div className="relative flex items-center">
-        <SearchIcon className="absolute left-3 w-4 h-4 text-brand-400" />
+        <SearchIcon className="absolute left-3 w-4 h-4 text-th-faint" />
 
         <input
           ref={inputRef}
-          className="w-full pl-10 pr-10 py-2.5 bg-surface-input rounded-lg text-sm text-brand-900 placeholder:text-brand-300 outline-none focus:ring-2 focus:ring-brand-900/20 transition-shadow"
+          className="w-full pl-10 pr-10 py-2.5 bg-surface-input rounded-lg text-sm text-th-text placeholder:text-th-faintest outline-none focus:ring-2 focus:ring-primary-bg/20 transition-shadow"
           placeholder="Enter city, street or ZIP code"
           type="text"
           value={searchQuery}
@@ -57,7 +57,7 @@ export default function SearchBar({ onError }: SearchBarProps) {
 
         {searchQuery && (
           <Button
-            className="absolute right-3 !w-5 !h-5 bg-brand-300 text-white hover:bg-brand-400"
+            className="absolute right-3 !w-5 !h-5 bg-th-faintest text-white hover:bg-th-faint"
             icon={<CloseIcon />}
             size="sm"
             variant="icon"

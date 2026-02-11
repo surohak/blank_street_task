@@ -18,7 +18,7 @@ export default function LocationList() {
 
   return (
     <div className="flex flex-col gap-3 px-4 py-3 overflow-y-auto flex-1">
-      <p className="text-sm font-semibold text-brand-900">
+      <p className="text-sm font-semibold text-th-text">
         {sorted.length}{' '}
         {userLocation ? 'results nearby' : `location${sorted.length === 1 ? '' : 's'}`}
       </p>

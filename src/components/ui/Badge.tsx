@@ -23,7 +23,7 @@ export default function Badge({ variant = 'amenity', status, amenity }: BadgePro
 
   if (variant === 'amenity' && amenity) {
     return (
-      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-input text-brand-500">
+      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-input text-th-muted">
         {AMENITY_LABELS[amenity]}
       </span>
     );

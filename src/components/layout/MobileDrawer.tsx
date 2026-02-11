@@ -17,7 +17,7 @@ export default function MobileDrawer({ expanded, onToggle, children }: MobileDra
         className="flex items-center justify-center py-3 cursor-pointer shrink-0"
         onClick={onToggle}
       >
-        <div className="w-10 h-1 rounded-full bg-brand-200" />
+        <div className="w-10 h-1 rounded-full bg-surface-hover" />
       </button>
 
       {expanded && <div className="flex flex-col flex-1 min-h-0">{children}</div>}

@@ -32,20 +32,20 @@ export default function Modal({ open, title, message, onClose }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-xl max-w-sm w-full mx-4 p-6 animate-in"
+        className="bg-surface-card rounded-2xl shadow-xl max-w-sm w-full mx-4 p-6 animate-in"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-3">
-          <h2 className="text-base font-bold text-brand-900">{title}</h2>
+          <h2 className="text-base font-bold text-th-text">{title}</h2>
           <Button
-            icon={<CloseIcon className="w-3.5 h-3.5 text-brand-400" />}
+            icon={<CloseIcon className="w-3.5 h-3.5 text-th-faint" />}
             size="sm"
             variant="icon"
             onClick={onClose}
           />
         </div>
 
-        <p className="text-sm text-brand-500 leading-relaxed">{message}</p>
+        <p className="text-sm text-th-muted leading-relaxed">{message}</p>
 
         <Button className="mt-5" onClick={onClose}>
           OK

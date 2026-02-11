@@ -13,11 +13,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const base = 'inline-flex items-center justify-center transition-colors cursor-pointer';
 
 const variants: Record<Variant, string> = {
-  primary: 'w-full bg-brand-900 text-white font-semibold rounded-lg hover:bg-brand-800',
-  pill: 'px-5 py-2 text-xs font-bold tracking-widest uppercase rounded-full bg-button text-brand-800 hover:bg-button-hover active:bg-button-active',
-  ghost: 'gap-2 text-xs font-medium text-brand-500 hover:text-brand-900',
-  icon: 'rounded-full hover:bg-surface-input text-brand-800',
-  'icon-elevated': 'rounded-full bg-white shadow-md hover:bg-gray-50 text-brand-900',
+  primary: 'w-full bg-primary-bg text-primary-text font-semibold rounded-lg hover:bg-primary-hover',
+  pill: 'px-5 py-2 text-xs font-bold tracking-widest uppercase rounded-full bg-button text-th-secondary hover:bg-button-hover active:bg-button-active',
+  ghost: 'gap-2 text-xs font-medium text-th-faint hover:text-th-text',
+  icon: 'rounded-full hover:bg-surface-input text-th-secondary',
+  'icon-elevated': 'rounded-full bg-surface-card shadow-md hover:bg-surface-hover text-th-text',
 };
 
 const sizes: Record<Variant, Record<Size, string>> = {

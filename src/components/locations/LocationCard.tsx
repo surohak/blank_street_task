@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { STATUS_CONFIG, FALLBACK_IMAGES } from '../../constants';
 import { useLocationStore } from '../../store/useLocationStore';
-import { getDistance, formatDistance } from '../../utils/geo';
+import { getDistance, formatDistance, estimateWalkingTime } from '../../utils/geo';
 import Button from '../ui/Button';
 
 import type { Location } from '../../types/location';
@@ -15,9 +13,9 @@ export default function LocationCard({ location }: LocationCardProps) {
   const selectLocation = useLocationStore((s) => s.selectLocation);
   const userLocation = useLocationStore((s) => s.userLocation);
 
-  const distance = userLocation
-    ? formatDistance(getDistance(userLocation, location.coordinates))
-    : null;
+  const miles = userLocation ? getDistance(userLocation, location.coordinates) : null;
+  const distance = miles === null ? null : formatDistance(miles);
+  const walkTime = miles === null ? null : estimateWalkingTime(miles);
 
   const status = STATUS_CONFIG[location.status] ?? STATUS_CONFIG.open;
 
@@ -37,9 +35,14 @@ export default function LocationCard({ location }: LocationCardProps) {
       />
 
       <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-bold text-brand-900 leading-snug">{location.name}</h3>
-        {distance && <p className="text-xs text-brand-400 mt-0.5">{distance}</p>}
-        <p className="text-xs text-brand-400 mt-0.5 leading-snug">{location.address}</p>
+        <h3 className="text-sm font-bold text-th-text leading-snug">{location.name}</h3>
+        {distance && (
+          <p className="text-xs text-th-faint mt-0.5">
+            {distance}
+            {walkTime && <span className="text-th-muted"> · {walkTime}</span>}
+          </p>
+        )}
+        <p className="text-xs text-th-faint mt-0.5 leading-snug">{location.address}</p>
         <p className={`text-xs font-medium mt-1 ${status.className}`}>{status.label}</p>
       </div>
 

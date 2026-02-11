@@ -37,6 +37,8 @@ export default function AppShell() {
   const handleBack = useCallback(() => {
     if (selectedLocationId) {
       selectLocation(null);
+    } else {
+      setDrawerExpanded(false);
     }
   }, [selectedLocationId, selectLocation]);
 
@@ -47,6 +49,16 @@ export default function AppShell() {
   }, [selectedLocationId]);
 
   const handleNavigate = useCallback(async () => {
+    if (selectedLocationId) {
+      const location = useLocationStore
+        .getState()
+        .locations.find((l) => l.id === selectedLocationId);
+      if (location) {
+        const url = `https://www.google.com/maps/dir/?api=1&destination=${location.coordinates.lat},${location.coordinates.lng}&travelmode=walking`;
+        window.open(url, '_blank');
+        return;
+      }
+    }
     try {
       const coords = await getUserLocation();
       setUserLocation(coords);
@@ -56,14 +68,22 @@ export default function AppShell() {
         'Unable to get your location. Please allow location access in your browser settings.',
       );
     }
-  }, [setUserLocation, showError]);
+  }, [selectedLocationId, setUserLocation, showError]);
 
-  const contentPanel = selectedLocationId ? <LocationDetail /> : <LocationList />;
+  const contentPanel = selectedLocationId ? (
+    <div key="detail" className="animate-slide-in h-full">
+      <LocationDetail />
+    </div>
+  ) : (
+    <div key="list" className="animate-slide-out h-full">
+      <LocationList />
+    </div>
+  );
 
   const previousEmpty = (
     <div className="flex flex-col items-center justify-center py-16 px-6 text-center">
-      <p className="text-sm font-semibold text-[#5c5347]">No previous locations</p>
-      <p className="text-[13px] text-[#9a9089] mt-1">Locations you visit will appear here</p>
+      <p className="text-sm font-semibold text-th-secondary">No previous locations</p>
+      <p className="text-[13px] text-th-faint mt-1">Locations you visit will appear here</p>
     </div>
   );
 

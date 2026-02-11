@@ -23,6 +23,17 @@ export function formatDistance(miles: number): string {
   return `${miles.toFixed(1)} mi`;
 }
 
+export function estimateWalkingTime(miles: number): string {
+  const minutes = Math.round((miles / 3.1) * 60);
+  if (minutes < 1) return '< 1 min walk';
+  if (minutes >= 60) {
+    const hrs = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return mins > 0 ? `${hrs} hr ${mins} min walk` : `${hrs} hr walk`;
+  }
+  return `${minutes} min walk`;
+}
+
 export function sortByDistance(locations: Location[], from: Coordinates): Location[] {
   return [...locations].sort(
     (a, b) => getDistance(from, a.coordinates) - getDistance(from, b.coordinates),
