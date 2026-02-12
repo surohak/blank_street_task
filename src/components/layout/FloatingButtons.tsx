@@ -14,11 +14,9 @@ export default function FloatingButtons({
 }: FloatingButtonsProps) {
   return (
     <div
-      className={`md:hidden absolute left-0 right-0 flex items-center ${
-        drawerExpanded ? 'justify-between' : 'justify-end'
-      } px-4 z-30 transition-all duration-300 ${
-        drawerExpanded ? 'bottom-[62%]' : 'bottom-14'
-      } pb-3`}
+      className={`md:hidden absolute left-0 right-0 flex items-center ${drawerExpanded ? 'justify-between' : 'justify-end'
+        } px-4 z-30 transition-all duration-300 ${drawerExpanded ? 'bottom-[62%]' : 'bottom-14'
+        } pb-3`}
     >
       {drawerExpanded && (
         <Button

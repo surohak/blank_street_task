@@ -103,7 +103,7 @@ export default function AppShell() {
   );
 
   return (
-    <div className="h-screen w-screen flex flex-col md:flex-row overflow-hidden">
+    <div className="h-dvh w-screen flex flex-col md:flex-row overflow-hidden">
       {/* Desktop sidebar */}
       <aside className="hidden md:flex flex-col w-96 bg-surface border-r border-border shrink-0">
         <SidebarHeader />
