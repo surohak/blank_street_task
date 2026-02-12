@@ -2,7 +2,8 @@ import { useEffect, useCallback } from 'react';
 
 import { AdvancedMarker, Pin, useMap } from '@vis.gl/react-google-maps';
 
-import { MAP_PIN } from '../../constants';
+import { getOffsetCenter } from './utils';
+import { MAP_PIN, MOBILE_BREAKPOINT } from '../../constants';
 import { useLocationStore } from '../../store/useLocationStore';
 
 export default function LocationMarkers() {
@@ -28,14 +29,25 @@ export default function LocationMarkers() {
     map.fitBounds(bounds, { top: 50, right: 50, bottom: 80, left: 50 });
   }, [map, isLoading, locations]);
 
-  // Pan to selected location
+  // Pan to selected location (offset upward on mobile so pin is visible above drawer)
   useEffect(() => {
     if (!map || !selectedLocationId) return;
     const location = locations.find((l) => l.id === selectedLocationId);
-    if (location) {
-      map.panTo({ lat: location.coordinates.lat, lng: location.coordinates.lng });
-      map.setZoom(15);
+    if (!location) return;
+
+    const target = { lat: location.coordinates.lat, lng: location.coordinates.lng };
+    map.setZoom(15);
+
+    if (window.innerWidth >= MOBILE_BREAKPOINT) {
+      map.panTo(target);
+      return;
     }
+
+    // On mobile, wait a tick so the projection is available after setZoom
+    requestAnimationFrame(() => {
+      const offsetLatLng = getOffsetCenter(map, target);
+      map.panTo(offsetLatLng ?? target);
+    });
   }, [map, selectedLocationId, locations]);
 
   // Pan to user location

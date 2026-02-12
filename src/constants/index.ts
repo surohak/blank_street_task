@@ -9,6 +9,11 @@ export const MAP_PIN = {
 
 export const NYC_CENTER = { lat: 40.735, lng: -73.985 } as const;
 
+/** Fraction of viewport the mobile drawer covers when expanded */
+export const MOBILE_DRAWER_HEIGHT = 0.62;
+/** Tailwind md breakpoint in px — used for mobile detection in JS */
+export const MOBILE_BREAKPOINT = 768;
+
 export const DEFAULT_HOURS: Record<DayOfWeek, HoursEntry> = {
   monday: { open: '7:00 AM', close: '7:00 PM' },
   tuesday: { open: '7:00 AM', close: '7:00 PM' },
